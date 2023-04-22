@@ -6,7 +6,8 @@ This code uses the Keras deep learning library and TensorFlow backend to build a
 - Numpy
 - Matplotlib
 - TensorFlow
-- Dataset
+- opendatasets
+
 The dataset from `kaggle` is divided into two parts: train and test datasets. Both datasets are read into pandas dataframes. The train dataset has 39209 images and the test dataset has 12630 images. Each image in the dataset contains metadata like width, height, and classid.
 
 # Exploring the dataset
