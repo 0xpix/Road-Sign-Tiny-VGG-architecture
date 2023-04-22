@@ -22,3 +22,4 @@ The model uses the Tiny VGG architecture. The model consists of four convolution
 The model is trained on the train dataset and evaluated on the test dataset using accuracy as the evaluation metric. The trained model is then used to predict the class labels of images in the test dataset. The classification report is generated to display precision, recall, and F1-score for each class label. The confusion matrix is also generated to display the number of correct and incorrect predictions for each class.
 
 ## Accuracy of 95%
+the accuracy for 10 epochs is about 95%
