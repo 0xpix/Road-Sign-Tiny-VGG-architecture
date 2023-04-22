@@ -1,4 +1,4 @@
-# Road-Sign-Tiny-VGG-architecture-
+# Tiny VGG architecture
 This code uses the Keras deep learning library and TensorFlow backend to build a convolutional neural network (CNN) to classify German traffic signs using the German Traffic Sign Recognition Benchmark dataset.
 
 # Libraries used
