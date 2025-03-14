@@ -12,7 +12,7 @@ preprocess:
 
 # Train the model
 train:
-	@python -m src.model.model
+	@python -m src.model.train
 
 # Make predictions on the test data
 # test:
