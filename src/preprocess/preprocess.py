@@ -2,11 +2,10 @@ import pandas as pd
 import pickle
 
 from PIL import Image
-from sklearn.model_selection import train_test_split
 
 import torch
 from torchvision import datasets, transforms
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, random_split
 
 from src.utils.utils import log_message
 
@@ -20,8 +19,8 @@ class CustomTestData():
 
     def __getitem__(self, idx):
         # Extracting the necessary columns
-        img_path = self.data.iloc[idx, 7]
-        labels = self.data.iloc[idx, 6]
+        img_path = self.data.loc[idx, "Path"]
+        labels = self.data.loc[idx, "ClassId"]
 
         # Get the acutual image
         img_path = "data/raw/gtsrb-german-traffic-sign/" + img_path
@@ -47,7 +46,9 @@ def process(type="train", PATH=None, transform=None, test_df=None):
         data = datasets.ImageFolder(root=PATH, transform=transform)
 
         # Split the data
-        train, valid = train_test_split(data, test_size=0.2, random_state=42)
+        train_size = int(0.8 * len(data))
+        valid_size = len(data) - train_size
+        train, valid = random_split(data, [train_size, valid_size])
 
         # Create the dataloaders
         train_loader = DataLoader(train, batch_size=32, shuffle=True)
@@ -68,7 +69,7 @@ def get_batched(data_loader):
     """
     data_list = []
     for img, label in data_loader:
-        data_list.append((img.numpy(), torch.tensor(label.numpy())))
+        data_list.append((img.numpy(), torch.tensor(label, dtype=torch.long).numpy()))
     return data_list
 
 def pickle_save(data, output_path):
