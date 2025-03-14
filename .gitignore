@@ -11,4 +11,5 @@ notebooks/.ipynb_checkpoints/
 
 # data
 data/raw/
+data/processed/
 config.json
