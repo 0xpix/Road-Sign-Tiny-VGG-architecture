@@ -1,0 +1,6 @@
+{
+  "CNN": {
+    "NUM_CLASS": 42,
+    "IMG_SIZE": 32
+  }
+}
