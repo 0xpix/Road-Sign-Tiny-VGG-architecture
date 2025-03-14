@@ -12,11 +12,11 @@ preprocess:
 
 # Train the model
 train:
-	@python -m src.model.train
+	@python -m src.model.model
 
 # Make predictions on the test data
-test:
-	@python -m src.model.predict
+# test:
+# 	@python -m src.model.predict
 
 # Evaluate performance
 evaluate:
@@ -28,6 +28,13 @@ visualize:
 
 # Run all: RUNS ALL SCRIPTS - DEFAULT
 all: download preprocess train test evaluate visualize
+
+#----------------------
+# Run the Test files
+#----------------------
+
+test:
+	@python -m unittest tests/test_model.py
 
 #---------------------------------------------------
 # Cleaning folders
