@@ -1,6 +1,7 @@
 import pandas as pd
 import pickle
 
+import numpy as np
 from PIL import Image
 
 import torch
@@ -64,13 +65,16 @@ def process(type="train", PATH=None, transform=None, test_df=None):
 
 def get_batched(data_loader):
     """
-    Function to get the data in batches
-        :param data_loader: DataLoader: DataLoader object
+    Converts batches from DataLoader to NumPy for JAX (Ensures NHWC format, Normalized)
     """
     data_list = []
     for img, label in data_loader:
-        data_list.append((img.numpy(), torch.tensor(label, dtype=torch.long).numpy()))
+        images = img.numpy().transpose(0, 2, 3, 1)  # Convert to NHWC format
+        images = (images - 0.5) / 0.5  # Normalize manually for JAX
+        labels = label.numpy().astype(np.int32)  # Convert labels properly
+        data_list.append((images, labels))
     return data_list
+
 
 def pickle_save(data, output_path):
     """
@@ -93,8 +97,6 @@ if __name__  == "__main__":
     transform = transforms.Compose([
         transforms.Resize((32, 32)),
         transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
-
         ])
 
     # Starting the preprocessing
