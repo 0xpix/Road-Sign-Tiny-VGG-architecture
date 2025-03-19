@@ -1,0 +1,8 @@
+{
+  "CNN": {
+    "NUM_CLASS": 43,
+    "IMG_SIZE": 32,
+    "LEARNING_RATE": 0.0001,
+    "NUM_EPOCHS": 100
+  }
+}
